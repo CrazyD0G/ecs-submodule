@@ -309,6 +309,8 @@ namespace ME.ECS.StatesHistory {
 
         private int playersCount;
         
+        public Tick greatestValidTick { get; private set; }
+        
         public virtual void OnConstruct() {
 
             this.oldestTick = Tick.Invalid;
@@ -873,7 +875,10 @@ namespace ME.ECS.StatesHistory {
 
             }
 
-            if (greatestValidTick != Tick.Invalid) this.CleanUpHashTable(greatestValidTick);
+            if (greatestValidTick != Tick.Invalid) {
+                this.CleanUpHashTable(greatestValidTick);
+                this.greatestValidTick = greatestValidTick;
+            }
             
         }
 
